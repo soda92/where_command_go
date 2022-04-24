@@ -10,8 +10,7 @@ import (
 )
 
 func main() {
-	argsWithProg := os.Args
-	if len(argsWithProg) != 2 {
+	if len(os.Args) != 2 {
 		fmt.Println("Usage: w <name>")
 		return
 	}
@@ -29,7 +28,7 @@ func main() {
 					name := filepath.Base(file.Name())
 					ext := filepath.Ext(file.Name())
 					base := strings.TrimSuffix(name, ext)
-					if base == argsWithProg[1] {
+					if strings.EqualFold(base, os.Args[1]) {
 						fmt.Print(path)
 						fmt.Printf("%c", os.PathSeparator)
 						color.Set(color.FgGreen)
