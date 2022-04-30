@@ -1,0 +1,34 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: go build && mv where_command_go.exe w.exe
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: w.exe
+
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: go build && mv where_command_go w
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: w
