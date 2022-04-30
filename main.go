@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
@@ -14,7 +15,11 @@ func main() {
 		fmt.Println("Usage: w <name>")
 		return
 	}
-	paths := strings.Split(os.Getenv("PATH"), ";")
+	sep := ";"
+	if runtime.GOOS == "linux" {
+		sep = ":"
+	}
+	paths := strings.Split(os.Getenv("PATH"), sep)
 	found := 0
 	for _, path := range paths {
 		if fileinfo, err := os.Stat(path); err == nil {
