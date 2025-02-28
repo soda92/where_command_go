@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-
-	"github.com/fatih/color"
 	"runtime"
 	"strings"
 )
@@ -30,7 +28,7 @@ func main() {
 	CheckArgs()
 	found := FindCommand(paths, os.Args[1])
 
-	if found == 0 {
-		color.Red("Command not found.\n")
+	if len(found) == 0 {
+		PrintError()
 	}
 }

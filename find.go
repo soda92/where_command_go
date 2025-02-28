@@ -5,12 +5,10 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	
-	"github.com/fatih/color"
 )
 
-func FindCommand(paths []string, command string) int {
-	found := 0
+func FindCommand(paths []string, command string) []string {
+	var found []string
 	for _, path := range paths {
 		if fileinfo, err := os.Stat(path); err == nil {
 			if fileinfo.IsDir() {
@@ -24,13 +22,7 @@ func FindCommand(paths []string, command string) int {
 					ext := filepath.Ext(file.Name())
 					base := strings.TrimSuffix(name, ext)
 					if strings.EqualFold(base, command) {
-						fmt.Print(path)
-						fmt.Printf("%c", os.PathSeparator)
-						color.Set(color.FgGreen)
-						fmt.Print(base)
-						color.Unset()
-						fmt.Println(ext)
-						found += 1
+						found = append(found, file.Name())
 					}
 				}
 			}
