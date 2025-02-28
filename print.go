@@ -15,7 +15,7 @@ func ColorPrint(p Path) {
 	base := strings.TrimSuffix(name, ext)
 	fmt.Print(p.Dir)
 	fmt.Printf("%c", os.PathSeparator)
-	color.Set(color.FgGreen)
+	color.Set(color.FgCyan, color.Bold)
 	fmt.Print(base)
 	color.Unset()
 	fmt.Println(ext)
