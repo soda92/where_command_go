@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-func FindCommand(paths []string, command string) []string {
-	var found []string
+func FindCommand(paths []string, command string) []Path {
+	var found []Path
 	for _, path := range paths {
 		if fileinfo, err := os.Stat(path); err == nil {
 			if fileinfo.IsDir() {
@@ -22,7 +22,12 @@ func FindCommand(paths []string, command string) []string {
 					ext := filepath.Ext(file.Name())
 					base := strings.TrimSuffix(name, ext)
 					if strings.EqualFold(base, command) {
-						found = append(found, file.Name())
+						var p Path
+						p.Dir = path
+						p.File = file.Name()
+						p.Basename = base
+						p.Suffix = ext
+						found = append(found, p)
 					}
 				}
 			}

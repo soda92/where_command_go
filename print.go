@@ -2,16 +2,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
+	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
-func ColorPrint(file string) {
-	name := filepath.Base(file)
-	ext := filepath.Ext(file)
+func ColorPrint(p Path) {
+	name := filepath.Base(p.File)
+	ext := filepath.Ext(p.File)
 	base := strings.TrimSuffix(name, ext)
-	fmt.Print(path)
+	fmt.Print(p.Dir)
 	fmt.Printf("%c", os.PathSeparator)
 	color.Set(color.FgGreen)
 	fmt.Print(base)
