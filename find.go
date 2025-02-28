@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -15,7 +14,7 @@ func FindCommand(paths []string, command string) int {
 	for _, path := range paths {
 		if fileinfo, err := os.Stat(path); err == nil {
 			if fileinfo.IsDir() {
-				files, err := ioutil.ReadDir(path)
+				files, err := os.ReadDir(path)
 				if err != nil {
 					fmt.Println(err)
 					os.Exit(1)
