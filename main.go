@@ -27,12 +27,9 @@ func CheckArgs() {
 func main() {
 	CheckArgs()
 	found := FindCommand(paths, os.Args[1])
-
-	for _, v := range found {
-		ColorPrint(v)
-	}
-
 	if len(found) == 0 {
 		PrintError()
 	}
+
+	found.Map(ColorPrint)
 }
